@@ -1,20 +1,42 @@
-html(lang="en-US")
+html(lang="en-US" ng-app="compendiumPrime")
   head
     meta(charset="utf-8")
     meta(http-equiv="X-UA-Compatible", content="IE=edge")
     meta(name="viewport", content="width=device-width, initial-scale=1")
-    title Angular Addresses
+    title Compendium
     link(rel="stylesheet" href="lib/build.css")
     link(rel="stylesheet" href="css/main.css")
     link(href='http://fonts.googleapis.com/css?family=Exo:200,300,400,500,600,200italic,400italic,600italic' rel='stylesheet' type='text/css')
+    <!-- always load the CSS -->
+    link(rel="stylesheet" type="text/css" href="http://cdn.knightlab.com/libs/timeline/latest/css/timeline.css")
+    script(type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.js")
+    script(type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/chosen/1.4.2/chosen.jquery.min.js")
   body
-    .container-fluid
-      .row
-        .col-xs-12
-          h1 Thematica
-
+    nav.navbar.navbar-static-top
+      .container-fluid
+        .row
+          .col-xs-10
+            span
+              a(href="#/") Compendium
+            span
+              a(href="#/profilepage") Profile
+            span
+              a(href="#/leaderboards") Leaderboards
+            span
+              a(href="#/search") Search
+            span
+              a(href="#/trials") Trials
+          .col-xs-2
+            span(ng-hide="auth")
+              a(href='#/login') Login
+            span(ng-show="auth")
+              a(href='#/logout') Logout
+    .background-filter
+    .app(ng-view)
 
   script(src="lib/build.js")
+  script(type="text/javascript" src="http://cdn.knightlab.com/libs/timeline/latest/js/storyjs-embed.js")
+  //- script(type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/timelinejs/2.36.0/js/timeline-min.js")
   script(src="js/main.js")
 
 

@@ -1,0 +1,12 @@
+.container-fluid
+  h1.med Leaderboads
+  .row
+    .col-xs-12
+      div.tag-cat(ng-repeat="(key, value) in lead.summary | objToArr | sortLeader")
+        .row
+          .col-xs-2
+            img(src="{{value.img}}")
+          .col-xs-10
+            a(href="#/profilepage")
+              h2.undr {{value.username}}
+            p Points: {{value.points}}

@@ -16,6 +16,10 @@
   ],
   "dependencies": {
     "angular": "~1.4.1",
-    "bootstrap": "~3.3.5"
+    "bootstrap": "~3.3.5",
+    "angular-route": "~1.4.1",
+    "firebase": "~2.2.7",
+    "chosen": "~1.4.2",
+    "angular-chosen-localytics": "~1.0.7"
   }
 }

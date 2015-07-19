@@ -1,0 +1,13 @@
+.container-fluid
+  .row.login-row
+    .col-xs-12.col-md-8.col-md-offset-2
+      form.login-form(ng-submit="launch.login()")
+        h3 Login
+        .form-group
+          form-label EMAIL
+          input.form-control(type="email" placeholder="email" ng-model="launch.data.email")
+        .form-group
+          form-label PASSWORD
+          input.form-control(type="password" placeholder="password" ng-model="launch.data.password")
+        input.form-button(type="submit" value="Login")
+        button.form-button(ng-click="launch.register()") Or Register

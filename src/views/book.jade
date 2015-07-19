@@ -1,0 +1,35 @@
+.container-fluid
+  .row
+    .col-xs-10.col-xs-offset-1
+      .book-header
+        .row
+          .col-xs-12.col-md-2
+            img.book(src="{{bpage.bookData.img}}")
+          .col-xs-12.col-md-10
+            h1.title {{bpage.bookData.title}}
+            h3 {{bpage.bookData.author}}
+      .row
+        .col-xs-12
+          h1.med Tags
+          div.tag-cat
+            h2.undr Space Flight
+            a(ng-repeat="(key, value) in bpage.finalObj.space" href="#/{{key}}")
+              p {{key}} ({{value}})
+          div.tag-cat
+            h2.undr Sub-Genre
+            a(ng-repeat="(key, value) in bpage.finalObj.subgen" href="#/{{key}}")
+              p {{key}} ({{value}})
+          div.tag-cat
+            h2.undr Social
+            a(ng-repeat="(key, value) in bpage.finalObj.social" href="#/{{key}}")
+              p {{key}} ({{value}})
+          div.tag-cat
+            h2.undr Scientific Concepts
+            a(ng-repeat="(key, value) in bpage.finalObj.scientific" href="#/{{key}}")
+              p {{key}} ({{value}})
+          div.tag-cat
+            h2.undr Other
+            a(ng-repeat="(key, value) in bpage.finalObj.other" href="#/{{key}}")
+              p {{key}} ({{value}})
+
+

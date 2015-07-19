@@ -1,0 +1,26 @@
+.container
+  form(name="profileForm")
+    h2 Edit Profile Information
+    form-group
+      form-label Email
+      input.form-control(type="email" ng-model="profform.data.email")
+    form-group
+      form-label Username
+      input.form-control(type="text" placeholder="username" ng-model="profform.data.username")
+    form-group
+      form-label Profile Pic
+      input.form-control(type="text" placeholder="Enter a url..." ng-model="profform.data.img")
+    form-group
+      form-label Name
+      input.form-control(type="text" placeholder="First" ng-model="profform.data.first")
+      input.form-control(type="text" placeholder="Last" ng-model="profform.data.last")
+    form-group
+      button.form-button(ng-click="profform.save()") Save
+.modal-notbootstrap(ng-show="profform.modal === true")
+  div.modal-alert
+    button.close(ng-click="profform.closeModal()") X
+    h3 Profile data saved successfully!
+    button(ng-click="profform.backToProfile()") Back to Profile
+
+
+
