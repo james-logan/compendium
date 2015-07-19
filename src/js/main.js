@@ -12,52 +12,7 @@ angular
       }
     })
   })
-  .config(function ($routeProvider) {
-    $routeProvider
-      .when('/', {
-        templateUrl: 'views/launch.html',
-        controller: 'launchController',
-        controllerAs: 'launch'
-      })
-      .when('/login', {
-        templateUrl: 'views/login.html',
-        controller: 'launchController',
-        controllerAs: 'launch'
-      })
-      .when('/profilepage', {
-        templateUrl: 'views/career.html',
-        controller: 'careerController',
-        controllerAs: 'career',
-        private: true
-      })
-      .when('/profileform', {
-        templateUrl: 'views/profileform.html',
-        controller: 'profileFormController',
-        controllerAs: 'profform'
-      })
-      .when('/leaderboards', {
-        templateUrl: 'views/leaderboards.html',
-        controller: 'leaderBoardController',
-        controllerAs: 'lead',
-        private: true
-      })
-      .when('/search', {
-        templateUrl: 'views/search.html'
-      })
-      .when('/trials', {
-        templateUrl: 'views/trials.html'
-      })
-      .when('/logout', {
-        templateUrl: 'views/logout.html',
-        controller: 'logOutController',
-        private: true
-      })
-      .when('/book/:id', {
-        templateUrl: 'views/book.html',
-        controller: 'bookPageController',
-        controllerAs: 'bpage'
-      })
-  })
+
   .controller('leaderBoardController', function ($location, $http, STORAGE_URL) {
     var vm = this;
     vm.summary = {}
@@ -65,8 +20,6 @@ angular
       .get(STORAGE_URL + 'points.json')
       .success(function (data) {
         Object.keys(data).forEach(function (uid) {
-          console.log(data)
-          console.log(data[uid].points)
           vm.summary[uid] = {
             points: data[uid]
           }
@@ -145,7 +98,6 @@ angular
   .controller( 'bookPageController', function ($http, $routeParams, STORAGE_URL) {
     var vm = this;
     vm.id = $routeParams.id
-    console.log(vm.id)
     vm.bookData = {}
     $http
         .get('https://www.googleapis.com/books/v1/volumes?q=' + vm.id + '&langRestrict=english&maxResults=1&orderBy=relevance&printType=books&projection=lite&key= AIzaSyChXEjLh0EhY7pzGcddLTnlcku596jLl0Y')
@@ -168,10 +120,8 @@ angular
         other: {}
       }
     vm.tagSorter = function (obj) {
-      console.log(obj)
       var refArr = ["space", "subgen", "social", "scientific", "other"]
       Object.keys(obj).forEach(function (uid) {
-        console.log("obj.uid", obj[uid])
         refArr.forEach(function (cat) {
           var tag = obj[uid][cat]
             if (vm.finalObj[cat][tag]) {
@@ -285,7 +235,6 @@ angular
     }
 
     vm.tagPoster = function () {
-      console.log(vm.tags)
       var tagPts = 0;
       Object.keys(vm.tags).forEach(function (cat) {
         if (vm.tags.cat != "") {
@@ -360,7 +309,6 @@ angular
         page: page,
         total: total
       }
-      console.log(book)
       if (book.page === book.total) {
         $http
           .delete(STORAGE_URL + 'profiles/' + $rootScope.auth.uid + '/currentlyreading/' + book.title.toLowerCase() + '.json')
@@ -372,7 +320,6 @@ angular
             vm.finishedBook();
           })
       } else {
-        console.log('cat')
         $http
           .put(STORAGE_URL + 'profiles/' + $rootScope.auth.uid + '/currentlyreading/' + book.title.toLowerCase() + '.json', book)
           .success(function () {
@@ -418,7 +365,6 @@ angular
               "thumbnail": data[key].img
             }
         }
-        console.log(data[key].title)
         vm.dataObject.timeline.date.push(point)
 
       })
@@ -448,106 +394,3 @@ angular
 
   })
 
-  .factory('Auth', function ($http, $rootScope, $location, STORAGE_URL) {
-    var fb = new Firebase(STORAGE_URL);
-    return {
-      register: function (loginObj, cb) {
-        fb.createUser(loginObj, function (err, authData) {
-          if (err) {
-            console.log(err)
-          } else if (cb) {
-            cb(authData);
-          }
-        })
-      },
-      login: function (loginObj, cb) {
-        fb.authWithPassword(loginObj, function (err, authData) {
-          if (err) {
-            console.log('err')
-          } else {
-            $rootScope.auth = authData;
-            if (cb) {
-              cb();
-            }
-          }
-        })
-      },
-      logout: function (cb) {
-        fb.unauth(function () {
-          $rootScope.auth = null;
-          cb();
-        });
-      },
-      requireLogin: function () {
-        $rootScope.auth = fb.getAuth();
-        if (!fb.getAuth()) {
-          $location.path('/login');
-        }
-      }
-    }
-  })
-  .filter('percentage', function () {
-    return function (obj) {
-      if (obj) {
-      Object.keys(obj).forEach(function (key) {
-        obj[key].percentage = Math.round(obj[key].page * 100 / obj[key].total)
-        if (isNaN(obj[key].percentage)) {
-          obj[key].percentage = 0;
-        }
-      })
-      return obj
-      }
-    }
-  })
-  .filter('timeLine', function ($rootScope) {
-    return function (obj) {
-      $rootScope.timelineHeight = 50;
-      if (obj) {
-        var cat = Object.keys(obj).map(function (key) {
-          return obj[key]
-        }).sort(function (a, b) {
-          var dateA = new Date(a.date)
-          var dateB = new Date(b.date)
-          return dateB.getTime() - dateA.getTime()
-        })
-        cat.forEach(function (book, i, array) {
-          var recentDate = new Date(array[0].date)
-          var bookDate = new Date(book.date)
-          book.topValue = (20 * (recentDate.getTime() - bookDate.getTime()))/(1000 * 60 * 60 * 24)
-          if (i%2 === 1) {
-            book.floatValue = "left";
-            book.leftMargin = 0;
-          } else {
-            book.floatValue = "right";
-            book.leftMargin = 310;
-          }
-        cat.forEach(function (book) {
-          book.date = new Date(book.date)
-          book.date = book.date.toLocaleDateString()
-        })
-        })
-      return cat
-      }
-    }
-  })
-  .filter('objToArr', function () {
-    return function (obj) {
-      if (obj) {
-        return Object
-          .keys(obj)
-          .map(function (key) {
-            obj[key]._id = key;
-            return obj[key];
-          });
-        }
-      }
-  })
-  .filter('sortLeader', function () {
-    return function (arr) {
-      if (arr) {
-        return arr.sort(function (a, b) {
-          return b.points - a.points
-        })
-      }
-    }
-  })
