@@ -1,0 +1,41 @@
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-xs-10 col-xs-offset-1">
+      <div class="book-header">
+        <div class="row">
+          <div class="col-xs-12 col-md-2"><img src="{{bpage.bookData.img}}" class="book"/></div>
+          <div class="col-xs-12 col-md-10">
+            <h1 class="title">{{bpage.bookData.title}}</h1>
+            <h3>{{bpage.bookData.author}}</h3>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <h1 class="med">Tags</h1>
+          <div class="tag-cat">
+            <h2 class="undr">Space Flight</h2><a ng-repeat="(key, value) in bpage.finalObj.space" href="#/{{key}}">
+              <p>{{key}} ({{value}})</p></a>
+          </div>
+          <div class="tag-cat">
+            <h2 class="undr">Sub-Genre</h2><a ng-repeat="(key, value) in bpage.finalObj.subgen" href="#/{{key}}">
+              <p>{{key}} ({{value}})</p></a>
+          </div>
+          <div class="tag-cat">
+            <h2 class="undr">Social</h2><a ng-repeat="(key, value) in bpage.finalObj.social" href="#/{{key}}">
+              <p>{{key}} ({{value}})</p></a>
+          </div>
+          <div class="tag-cat">
+            <h2 class="undr">Scientific Concepts</h2><a ng-repeat="(key, value) in bpage.finalObj.scientific" href="#/{{key}}">
+              <p>{{key}} ({{value}})</p></a>
+          </div>
+          <div class="tag-cat">
+            <h2 class="undr">Other</h2><a ng-repeat="(key, value) in bpage.finalObj.other" href="#/{{key}}">
+              <p>{{key}} ({{value}})</p></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

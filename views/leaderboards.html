@@ -1,0 +1,17 @@
+
+<div class="container-fluid">
+  <h1 class="med">Leaderboads</h1>
+  <div class="row">
+    <div class="col-xs-12">
+      <div ng-repeat="(key, value) in lead.summary | objToArr | sortLeader" class="tag-cat">
+        <div class="row">
+          <div class="col-xs-2"><img src="{{value.img}}"/></div>
+          <div class="col-xs-10"><a href="#/profilepage">
+              <h2 class="undr">{{value.username}}</h2></a>
+            <p>Points: {{value.points}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

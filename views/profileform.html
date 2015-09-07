@@ -1,0 +1,33 @@
+
+<div class="container">
+  <form name="profileForm">
+    <h2>Edit Profile Information</h2>
+    <form-group>
+      <form-label>Email</form-label>
+      <input type="email" ng-model="profform.data.email" class="form-control"/>
+    </form-group>
+    <form-group>
+      <form-label>Username</form-label>
+      <input type="text" placeholder="username" ng-model="profform.data.username" class="form-control"/>
+    </form-group>
+    <form-group>
+      <form-label>Profile Pic</form-label>
+      <input type="text" placeholder="Enter a url..." ng-model="profform.data.img" class="form-control"/>
+    </form-group>
+    <form-group>
+      <form-label>Name</form-label>
+      <input type="text" placeholder="First" ng-model="profform.data.first" class="form-control"/>
+      <input type="text" placeholder="Last" ng-model="profform.data.last" class="form-control"/>
+    </form-group>
+    <form-group>
+      <button ng-click="profform.save()" class="form-button">Save</button>
+    </form-group>
+  </form>
+</div>
+<div ng-show="profform.modal === true" class="modal-notbootstrap">
+  <div class="modal-alert">
+    <button ng-click="profform.closeModal()" class="close">X</button>
+    <h3>Profile data saved successfully!</h3>
+    <button ng-click="profform.backToProfile()">Back to Profile</button>
+  </div>
+</div>

@@ -1,0 +1,111 @@
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-xs-12 col-sm-10 col-sm-offset-1">
+      <div class="row">
+        <div class="img-box"><img src="{{career.info.img}}"/></div>
+        <div class="profile-box">
+          <h2>{{career.info.username}}</h2>
+          <h3>Rank: {{career.rank}}</h3>
+          <h3>Points: {{career.points}}</h3>
+          <button ng-click="career.edit()" class="form-button">Edit Profile</button>
+        </div>
+      </div>
+      <div ng-show="career.info.currentlyreading" class="row">
+        <h2>Currently Reading</h2>
+        <div ng-repeat="(key, value) in career.info.currentlyreading | percentage" class="book-in-progress">
+          <div class="col-xs-12 current-read-info"><img src="{{value.img}}" class="book-thumb-big"/>
+            <div class="col-xs-10">
+              <h3>{{value.title}}</h3>
+              <h4>by {{value.author}}</h4>
+            </div>
+            <form class="top-margin-40">
+              <div class="row top-margin-40">
+                <div class="col-xs-12 col-md-5 book-prog">
+                  <form-label>Page:</form-label>
+                  <input type="number" min="0" max="{{value.total}}" ng-model="value.page" class="pages"/>
+                  <form-label>Total:</form-label>
+                  <input type="number" ng-model="value.total" class="pages"/>
+                  <button ng-click="career.pageUpdate(value.img, value.page, value.total, value.title)" value="Save">Save</button>
+                  <button ng-click="career.deleteProgressBook(value.title)" value="Abandon">Abandon</button>
+                </div>
+                <div class="col-xs-12 col-md-5">
+                  <div class="out-progress-bar progress">
+                    <div style="width: {{value.percentage}}%;" class="inner-progress-bar progress-bar">
+                      <h4 id="percentage">{{value.percentage}}%</h4>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12 col-md-4">
+          <h2>Career Timeline</h2>
+          <form class="book-form">
+            <div class="basic-form">
+              <h3>Input a New Book or Movie</h3>
+              <form-group>
+                <select chosen="chosen" class="select chosen-select">
+                  <option value="Book">Book</option>
+                  <option value="Movie">Movie</option>
+                  <option value="Video Game">Video Game</option>
+                </select>
+              </form-group>
+              <form-group>
+                <input type="text" placeholder="Interstellar, Farenheit 451, DOOM 3, etc..." ng-model="career.newBook.title" class="form-control"/>
+              </form-group>
+              <button value="Started" ng-click="career.newBookInProgress()" class="form-button">Started</button>
+              <button value="Finished" ng-click="career.finishedBook()" class="form-button">Finished</button>
+            </div>
+          </form>
+        </div>
+        <div class="col-xs-12 col-md-8">
+          <div class="row">
+            <div class="col-xs-12">
+              <div class="row">
+                <div id="timeline-embed"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div ng-show="career.tagForm" class="tag-modal">
+    <div class="tag-form">
+      <h3>Tags</h3>
+      <form ng-submit="career.tagPoster()">
+        <form-group>
+          <form-label>Space Travel (limit 1)</form-label>
+          <select chosen="chosen" ng-model="career.tags.space" class="form-control chosen-select">
+            <option value=""></option>
+            <option value="planet bound">Planet-bound</option>
+            <option value="subftl">subFTL</option>
+            <option value="FTL: wormholes">FTL: Wormholes</option>
+            <option value="FTL: plain">FTL: Other</option>
+          </select>
+          <form-label>Sub-genre (limit 2)</form-label>
+          <select chosen="chosen" multiple="multiple" ng-model="career.tags.subgen" max_selected_option="2" class="form-control chosen-select-2">
+            <option value="cyberpunk">Cyberpunk</option>
+            <option value="scifantasy">Sci-Fantasy</option>
+            <option value="space opera">Space Opera</option>
+            <option value="hard scifi">Hard Sf</option>
+            <option value="military scifi">Military Scifi</option>
+            <option value="steampunk">Steampunk</option>
+            <option value="other">Other</option>
+          </select>
+          <form-label>Social Tags (limit 1)</form-label>
+          <input type="text" ng-model="career.tags.social" class="form-control"/>
+          <form-label>Scientific Concepts (limit 4)</form-label>
+          <input type="text" ng-model="career.tags.scientific" class="form-control"/>
+          <form-label>Other (limit 2)</form-label>
+          <input type="text" ng-model="career.tags.other" class="form-control"/>
+        </form-group>
+        <input type="submit" value="Save Tags"/>
+      </form>
+    </div>
+  </div>
+</div><!-- and then one of either -->
