@@ -41,17 +41,17 @@
           h2 Career Timeline
           form.book-form
             div.basic-form
-              h3 Input a New Book or Movie
+              h3 Input a New Book
               form-group
                 select.select.chosen-select(chosen)
                   option(value="Book") Book
-                  option(value="Movie") Movie
-                  option(value="Video Game") Video Game
+                  //- option(value="Movie") Movie
+                  //- option(value="Video Game") Video Game
               form-group
-                input.form-control(type="text" placeholder="Interstellar, Farenheit 451, DOOM 3, etc..." ng-model="career.newBook.title")
+                input.form-control(type="text" placeholder="Foundation, Farenheit 451, etc..." ng-model="career.newBook.title")
               button.form-button(value="Started" ng-click="career.newBookInProgress()") Started
               button.form-button(value="Finished" ng-click="career.finishedBook()") Finished
-        .col-xs-12.col-md-8
+        .col-xs-12.col-md-8.col-lg-6.col-lg-offset-2
           //- .col-md-pull-5
           .row
             .col-xs-12
