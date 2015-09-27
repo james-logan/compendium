@@ -424,3 +424,9 @@ img.media-image {
     background-color: transparent;
   }
 }
+
+@media screen and (min-width: 1400px) {
+  .large-pull-right {
+    float: right;
+  }
+}

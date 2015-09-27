@@ -51,23 +51,20 @@
                 input.form-control(type="text" placeholder="Foundation, Farenheit 451, etc..." ng-model="career.newBook.title")
               button.form-button(value="Started" ng-click="career.newBookInProgress()") Started
               button.form-button(value="Finished" ng-click="career.finishedBook()") Finished
-        .col-xs-12.col-md-8.col-lg-6.col-lg-offset-2
-          //- .col-md-pull-5
-          .row
-            .col-xs-12
-              .row
-                div#timeline-embed
-                //- div.out-book-box(ng-repeat="(key, value) in career.info.finished | timeLine" style="top: {{value.topValue}}px; margin-left: {{value.leftMargin}}")
-                //-   div.book-box(style="float: {{value.floatValue}};")
-                //-     img.book-thumb(src="{{value.img}}")
-                //-     div.book-div
-                //-       div.title-div
-                //-         a(href="#/book/{{value.title}}")
-                //-           h4 {{value.title}}
-                //-       h5 by {{value.author}}
-                //-       h5 {{value.date}}
-                //- //- .col-xs-2.col-xs-offset-5
-                //- div.timeline(style="height: {{career.timeLineHeight}}")
+        .col-xs-12.col-md-8.col-lg-6.col-lg-offset-1
+          div.large-pull-right
+            div#timeline-embed
+            //- div.out-book-box(ng-repeat="(key, value) in career.info.finished | timeLine" style="top: {{value.topValue}}px; margin-left: {{value.leftMargin}}")
+            //-   div.book-box(style="float: {{value.floatValue}};")
+            //-     img.book-thumb(src="{{value.img}}")
+            //-     div.book-div
+            //-       div.title-div
+            //-         a(href="#/book/{{value.title}}")
+            //-           h4 {{value.title}}
+            //-       h5 by {{value.author}}
+            //-       h5 {{value.date}}
+            //- //- .col-xs-2.col-xs-offset-5
+            //- div.timeline(style="height: {{career.timeLineHeight}}")
   .tag-modal(ng-show="career.tagForm")
     .tag-form
       h3 Tags
